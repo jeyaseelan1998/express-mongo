@@ -3,6 +3,6 @@ const { actionHealthCheck } = require("../../controllers/v1/HealthCheckControlle
 
 const router = Router();
 
-router.get("/", actionHealthCheck)
+router.get("/", actionHealthCheck);
 
 module.exports = router;

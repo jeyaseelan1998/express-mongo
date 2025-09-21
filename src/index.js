@@ -5,6 +5,7 @@ const connectDatabase = require("./db");
 
 // v1 controllers
 const healthCheckRouter = require("./routers/v1/HealthCheckRoute");
+const authenticationRouter = require("./routers/v1/AuthenticationRoute");
 
 // express app
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 
 // v1 Routers
 app.use("/v1/health-check", healthCheckRouter);
+app.use("/v1/page", authenticationRouter);
 
 async function initializeServer() {
     try {
