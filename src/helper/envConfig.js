@@ -13,4 +13,5 @@ module.exports = {
     DB_NAME: process.env.DB_NAME,
     SUPER_ADMIN: process.env.SUPER_ADMIN,
     MEMBER_ADMIN: process.env.MEMBER_ADMIN,
+    SECRET_KEY: process.env.SECRET_KEY,
 };
