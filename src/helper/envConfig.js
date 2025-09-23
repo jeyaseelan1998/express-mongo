@@ -1,7 +1,6 @@
-
 // Check for .env file
 if (require("fs").existsSync(".env")) {
-    require("dotenv").config({ path: ".env" });
+    require("dotenv").config({ path: ".env", debug: process.env.MODE === "dev" });
 } else {
     throw new Error("Include .env File !!!");
 }

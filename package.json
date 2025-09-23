@@ -4,7 +4,7 @@
   "description": "A Learning Backend project",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "MODE=dev nodemon src/index.js",
     "prod": "node src/index.js"
   },
   "keywords": [],
