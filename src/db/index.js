@@ -3,6 +3,8 @@ const { CONNECTION_STRING, DB_NAME } = require("../helper/envConfig");
 
 module.exports = async function connectDatabase() {
     try {
+        console.log({ CONNECTION_STRING, DB_NAME });
+
         await mongoose.connect(CONNECTION_STRING, {
             dbName: DB_NAME,
         });
