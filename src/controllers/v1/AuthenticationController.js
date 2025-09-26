@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../../models/User");
 const Role = require("../../models/Role");
 const { SECRET_KEY } = require("../../helper/envConfig");
+const { cookieName } = require("../../helper/constants");
 const { errorLogger } = require("./ErrorController")
 const { FailedResponse, SuccessResponse } = require("../../helper/Response");
 
@@ -65,7 +66,15 @@ async function actionLogin(req, res) {
                     const jwtToken = jwt.sign({ email }, SECRET_KEY);
                     res
                         .status(200)
-                        .send({ jwtToken });
+                        .cookie(
+                            cookieName,
+                            jwtToken,
+                            {
+                                secure: true,
+                                expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+                            }
+                        )
+                        .send({ success: true });
                 }
             }
         }
