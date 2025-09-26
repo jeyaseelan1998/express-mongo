@@ -1,4 +1,6 @@
-const whitelist = ['http://localhost:3000'];
+const { ALLOWED_ORIGINS } = require("./envConfig");
+
+const whitelist = (ALLOWED_ORIGINS || "").split(",");
 
 const corsOptions = {
     origin: function (origin, callback) {
