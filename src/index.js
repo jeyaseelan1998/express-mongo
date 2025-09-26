@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const { PORT, API_URL } = require("./helper/envConfig");
 const connectDatabase = require("./db");
@@ -10,6 +11,9 @@ const authenticationRouter = require("./routers/v1/AuthenticationRoute");
 // express app
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: ["*"]
+}));
 
 // v1 Routers
 app.use("/v1/health-check", healthCheckRouter);

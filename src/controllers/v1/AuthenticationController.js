@@ -43,24 +43,30 @@ async function actionRegister(req, res) {
 
 async function actionLogin(req, res) {
     try {
-        const a = h;    
         const { email, password } = req.body;
         if (!email || !password) {
             res
                 .status(400)
                 .send(new FailedResponse({ status: 400, message: "Email / Password is required." }));
         } else {
-            const { password: hash } = await User.findOne({ email });
-            const isPasswordCorrect = await bcrypt.compare(password, hash);
-            if (isPasswordCorrect === false) {
+            const data = await User.findOne({ email });
+            if (!data) {
                 res
                     .status(401)
                     .send(new FailedResponse({ status: 401, message: "Email / Password is incorrect." }));
             } else {
-                const jwtToken = jwt.sign({ email }, SECRET_KEY);
-                res
-                    .status(200)
-                    .send({ jwtToken });
+                const { password: hash } = data;
+                const isPasswordCorrect = await bcrypt.compare(password, hash);
+                if (isPasswordCorrect === false) {
+                    res
+                        .status(401)
+                        .send(new FailedResponse({ status: 401, message: "Email / Password is incorrect." }));
+                } else {
+                    const jwtToken = jwt.sign({ email }, SECRET_KEY);
+                    res
+                        .status(200)
+                        .send({ jwtToken });
+                }
             }
         }
     } catch (error) {
