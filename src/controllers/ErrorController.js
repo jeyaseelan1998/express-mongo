@@ -1,4 +1,4 @@
-const Error = require("../../models/Error");
+const Error = require("../models/Error");
 
 async function errorLogger({ message, stack, repository, url }) {
     try {

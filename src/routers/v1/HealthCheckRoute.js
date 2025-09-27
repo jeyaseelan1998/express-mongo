@@ -1,8 +1,10 @@
 const { Router } = require("express");
-const { actionHealthCheck } = require("../../controllers/v1/HealthCheckController");
+const { actionHealthCheck, actionHealthCheckSetToken } = require("../../controllers/HealthCheckController");
+const { authenticate } = require("../../middlewares/Authenticate");
 
 const router = Router();
 
-router.get("/", actionHealthCheck);
+router.get("/", authenticate, actionHealthCheck);
+router.get("/set-token", actionHealthCheckSetToken);
 
 module.exports = router;

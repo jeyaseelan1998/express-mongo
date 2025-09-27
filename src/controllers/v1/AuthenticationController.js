@@ -4,7 +4,7 @@ const User = require("../../models/User");
 const Role = require("../../models/Role");
 const { SECRET_KEY } = require("../../helper/envConfig");
 const { cookieName } = require("../../helper/constants");
-const { errorLogger } = require("./ErrorController")
+const { errorLogger } = require("../ErrorController")
 const { FailedResponse, SuccessResponse } = require("../../helper/Response");
 
 async function actionRegister(req, res) {
@@ -36,6 +36,7 @@ async function actionRegister(req, res) {
             }
         }
     } catch (error) {
+        await errorLogger({ message: error.message, stack: error.stack, repository: "website", url: req.originalUrl });
         res
             .status(500)
             .send(new FailedResponse({ status: 500, message: error.message, stack: error.stack }));
