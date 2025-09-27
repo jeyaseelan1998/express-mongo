@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 // v1 Routers
-app.use("/v1/health-check", healthCheckRouter);
+app.use("/health-check", healthCheckRouter);
 app.use("/v1/page", authenticationRouter);
 
 async function initializeServer() {

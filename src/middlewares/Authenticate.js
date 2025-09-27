@@ -8,7 +8,6 @@ const { FailedResponse } = require("../helper/Response");
 async function authenticate(req, res, next) {
     try {
         const token = req.cookies[cookieName];
-        console.log(cookieName, token);
         jwt.verify(token, SECRET_KEY, (error, payload) => {
             if (!error) {
                 req.params.email = payload.email;
